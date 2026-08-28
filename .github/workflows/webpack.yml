@@ -1,7 +1,44 @@
-    - name: Build
+name: Build UI with Webpack
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'ui/**'
+      - '.github/workflows/webpack.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'ui/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'ui/package-lock.json'
+
+    - name: Install dependencies
       run: |
         cd ui
-        npm install
-        npx webpack
+        npm ci
+
+    - name: Build with Webpack
+      run: |
+        cd ui
+        npm run build
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: ui-build
+        path: ui/dist/
 
 

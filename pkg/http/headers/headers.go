@@ -39,8 +39,18 @@ const (
 
 	// MCP-specific headers.
 
+	// MCPProtocolVersionHeader carries the protocol version for HTTP MCP requests.
+	MCPProtocolVersionHeader = "MCP-Protocol-Version"
 	// MCPMethodHeader mirrors the JSON-RPC method for request routing.
 	MCPMethodHeader = "Mcp-Method"
+	// MCPNameHeader identifies the requested MCP primitive.
+	MCPNameHeader = "Mcp-Name"
+	// MCPParamHeaderPrefix prefixes request headers projected from MCP parameters.
+	MCPParamHeaderPrefix = "Mcp-Param-"
+	// MCPParamOwnerHeader carries the projected owner parameter.
+	MCPParamOwnerHeader = MCPParamHeaderPrefix + "owner"
+	// MCPParamRepoHeader carries the projected repo parameter.
+	MCPParamRepoHeader = MCPParamHeaderPrefix + "repo"
 	// MCPReadOnlyHeader indicates whether the MCP is in read-only mode.
 	MCPReadOnlyHeader = "X-MCP-Readonly"
 	// MCPToolsetsHeader is a comma-separated list of MCP toolsets that the request is for.

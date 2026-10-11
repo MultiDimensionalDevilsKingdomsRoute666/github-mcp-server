@@ -1,9 +1,17 @@
 package github
 
 import (
-	"github.com/github/github-mcp-server/pkg/inventory"
-	"github.com/github/github-mcp-server/pkg/scopes"
+	"github.com/github/github-mcp-server/v2/pkg/inventory"
+	"github.com/github/github-mcp-server/v2/pkg/scopes"
 )
+
+func publicRepositoryWriteScopeAccess() inventory.ScopeAccess {
+	access := scopes.RequireAll(scopes.Repo)
+	access.Visible = func(activeScopes []string) bool {
+		return scopes.HasAll(activeScopes, scopes.PublicRepo)
+	}
+	return access
+}
 
 func repositoryOrOrganizationScopeAccess() inventory.ScopeAccess {
 	return scopes.DynamicChallenge(

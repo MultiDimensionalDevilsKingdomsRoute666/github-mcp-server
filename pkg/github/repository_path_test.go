@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/github/github-mcp-server/pkg/inventory"
-	"github.com/github/github-mcp-server/pkg/translations"
+	"github.com/github/github-mcp-server/v2/pkg/inventory"
+	"github.com/github/github-mcp-server/v2/pkg/translations"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -84,7 +84,7 @@ func TestFileWriteWorkflowScopeChallenges(t *testing.T) {
 				map[string]any{"path": "README.md"},
 				map[string]any{"path": ".github/workflows/ci.yml"},
 			}},
-			want: []string{"repo", "workflow"},
+			want: []string{"workflow"},
 		},
 		{
 			name: "push validates entries after workflow",
